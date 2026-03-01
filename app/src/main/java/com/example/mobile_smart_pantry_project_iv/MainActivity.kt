@@ -1,25 +1,39 @@
 package com.example.mobile_smart_pantry_project_iv
 
+import android.app.AlertDialog
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.mobile_smart_pantry_project_iv.adapter.ProductAdapter
 import com.example.mobile_smart_pantry_project_iv.databinding.ActivityMainBinding
+import com.example.mobile_smart_pantry_project_iv.databinding.DialogAddProductBinding
+import com.example.mobile_smart_pantry_project_iv.model.Product
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import java.io.File
+import java.util.UUID
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
+    private var productList = mutableListOf<Product>()
+    private lateinit var adapter: ProductAdapter
+    private val fileName = "inventory.json"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+
+
+
+        adapter = ProductAdapter(this, productList)
+        binding.listView.adapter = adapter
+
+
+
     }
+
+
 }
