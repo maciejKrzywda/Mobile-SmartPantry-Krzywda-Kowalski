@@ -29,7 +29,29 @@ class MainActivity : AppCompatActivity() {
         adapter = ProductAdapter(this, productList) { savePantry() }
         binding.listView.adapter = adapter
 
+        binding.btnAddProduct.setOnClickListener {
+            val dialogBinding = DialogAddProductBinding.inflate(layoutInflater)
+            AlertDialog.Builder(this)
+                .setTitle("Nowy Produkt")
+                .setView(dialogBinding.root)
+                .setPositiveButton("Dodaj") { _, _ ->
+                    val name = dialogBinding.etName.text.toString()
+                    val qty = dialogBinding.etQuantity.text.toString().toIntOrNull() ?: 0
+                    val cat = dialogBinding.etCategory.text.toString()
+                    val img = dialogBinding.etImageRef.text.toString()
+
+                    if (name.isNotEmpty()) {
+                        productList.add(Product(java.util.UUID.randomUUID().toString(), name, qty, cat, img))
+                        adapter.notifyDataSetChanged()
+                        savePantry()
+                    }
+                }
+                .setNegativeButton("Anuluj", null)
+                .show()
+        }
+
         loadPantry()
+
 
     }
 

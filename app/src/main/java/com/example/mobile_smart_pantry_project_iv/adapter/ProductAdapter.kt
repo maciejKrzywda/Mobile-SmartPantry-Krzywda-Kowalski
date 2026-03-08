@@ -48,6 +48,11 @@ class ProductAdapter(
                 onDataChanged()
             }
         }
+        binding.btnDelete.setOnClickListener {
+            products.removeAt(position)
+            notifyDataSetChanged()
+            onDataChanged()
+        }
 
 
 
