@@ -19,7 +19,7 @@ class ProductAdapter(context: Context, private val products: List<Product>) :
             ItemProductBinding.bind(convertView)
         }
 
-        val p = products[position]
+        var p = products[position]
         binding.tvName.text = p.name
         binding.tvCategory.text = p.category
         binding.tvQuantity.text = p.quantity.toString()
@@ -32,6 +32,16 @@ class ProductAdapter(context: Context, private val products: List<Product>) :
 
         val resId = context.resources.getIdentifier(p.imageRef, "drawable", context.packageName)
         binding.imgProduct.setImageResource(if (resId != 0) resId else android.R.drawable.ic_menu_help)
+
+        binding.btnDecrease.setOnClickListener {
+            p.quantity--
+            notifyDataSetChanged()
+        }
+
+        binding.btnIncrease.setOnClickListener {
+            p.quantity++
+            notifyDataSetChanged()
+        }
 
         return binding.root
     }
