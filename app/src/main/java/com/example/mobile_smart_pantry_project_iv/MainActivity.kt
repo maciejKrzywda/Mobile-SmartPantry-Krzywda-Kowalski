@@ -20,11 +20,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var productList = mutableListOf<Product>()
     private lateinit var adapter: ProductAdapter
-    private val pantryString = File(filesDir, "raw/pantry.json")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -37,15 +35,26 @@ class MainActivity : AppCompatActivity() {
 
     fun loadPantry() {
         try {
-            val file = File(filesDir, "raw/pantry.json")
-            var fileRead = file.readText()
-            val json = Json {ignoreUnknownKeys = true}
-            val loadedList = json.decodeFromString<List<Product>>(fileRead)
+
+            val inputStream = resources.openRawResource(R.raw.pantry)
+            val jsonString = inputStream.bufferedReader().use { it.readText() }
+
+            println("JSON: $jsonString")
+
+            val json = Json { ignoreUnknownKeys = true }
+            val loadedList = json.decodeFromString<List<Product>>(jsonString)
+
+            println("SIZE: ${loadedList.size}")
+
+            productList.clear()
+            productList.addAll(loadedList)
 
             adapter.notifyDataSetChanged()
-        } catch (e: Error) {
 
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
+
     }
 
 
