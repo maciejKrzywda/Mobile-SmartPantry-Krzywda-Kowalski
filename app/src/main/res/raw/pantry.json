@@ -1,0 +1,37 @@
+[
+  {
+    "uuid": "1",
+    "name": "gaśnica",
+    "quantity": "4",
+    "category": "equipment",
+    "imageRef": "extinguisher"
+  },
+  {
+    "uuid": "2",
+    "name": "śrubokręt",
+    "quantity": "7",
+    "category": "tools",
+    "imageRef": "screwdriver"
+  },
+  {
+    "uuid": "3",
+    "name": "Płyta Half-Life 2 z 2004 roku",
+    "quantity": "1",
+    "category": "exotic",
+    "imageRef": "halflife"
+  },
+  {
+    "uuid": "4",
+    "name": "karty",
+    "quantity": "52",
+    "category": "games",
+    "imageRef": "cards"
+  },
+  {
+    "uuid": "5",
+    "name": "klucz",
+    "quantity": "8",
+    "category": "tools",
+    "imageRef": "wrench"
+  }
+]

@@ -5,32 +5,58 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="16dp">
-    <ImageView android:id="@+id/imgProduct"
-        android:layout_width="50dp" android:layout_height="50dp"
+
+    <ImageView
+        android:id="@+id/imgProduct"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@android:drawable/ic_menu_gallery" />
-    <LinearLayout android:layout_width="0dp"
+
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_marginStart="16dp"
         android:orientation="vertical">
-        <TextView android:id="@+id/tvName"
+
+        <TextView
+            android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textStyle="bold" />
-        <TextView android:id="@+id/tvCategory"
+
+        <TextView
+            android:id="@+id/tvCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
     </LinearLayout>
-    <TextView android:id="@+id/tvQuantity"
+
+    <TextView
+        android:id="@+id/tvQuantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp" />
-<!--    <Button
+        android:textSize="20sp"
+        android:layout_marginEnd="8dp" />
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>-->
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnIncrease"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:backgroundTint="#00FF00"/>
+
+        <Button
+            android:id="@+id/btnDecrease"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:backgroundTint="#FF0000"/>
+
+    </LinearLayout>
+
 </LinearLayout>
