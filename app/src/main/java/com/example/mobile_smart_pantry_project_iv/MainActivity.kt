@@ -26,35 +26,41 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        adapter = ProductAdapter(this, productList)
+        adapter = ProductAdapter(this, productList) { savePantry() }
         binding.listView.adapter = adapter
 
         loadPantry()
 
     }
 
-    fun loadPantry() {
+    private val fileName = "inventory.json"
+
+    private fun loadPantry() {
         try {
-
-            val inputStream = resources.openRawResource(R.raw.pantry)
-            val jsonString = inputStream.bufferedReader().use { it.readText() }
-
-            println("JSON: $jsonString")
-
-            val json = Json { ignoreUnknownKeys = true }
-            val loadedList = json.decodeFromString<List<Product>>(jsonString)
-
-            println("SIZE: ${loadedList.size}")
-
+            val file = File(filesDir, fileName)
+            if (!file.exists()) {
+                val inputStream = resources.openRawResource(R.raw.pantry)
+                val rawJson = inputStream.bufferedReader().use { it.readText() }
+                file.writeText(rawJson)
+            }
+            val jsonString = file.readText()
+            val loadedList = Json.decodeFromString<List<Product>>(jsonString)
             productList.clear()
             productList.addAll(loadedList)
-
             adapter.notifyDataSetChanged()
-
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
 
+    private fun savePantry() {
+        try {
+            val file = File(filesDir, "inventory.json")
+            val jsonString = Json.encodeToString(productList)
+            file.writeText(jsonString)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
 
