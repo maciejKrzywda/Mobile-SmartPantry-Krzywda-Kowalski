@@ -27,20 +27,19 @@ class ProductAdapter(
         binding.tvCategory.text = p.category
         binding.tvQuantity.text = p.quantity.toString()
 
+
         binding.itemRoot.setBackgroundColor(if (p.quantity < 5) Color.parseColor("#44B71C1C") else Color.TRANSPARENT)
 
-        // Bezpieczne wczytywanie zasobu - sprawdzamy, czy nazwa nie jest pusta i czy zasób istnieje
-        val resId = if (p.imageRef.isNotEmpty()) {
-            context.resources.getIdentifier(p.imageRef, "drawable", context.packageName)
-        } else 0
-        
+        val resId = context.resources.getIdentifier(p.imageRef, "drawable", context.packageName)
         binding.imgProduct.setImageResource(if (resId != 0) resId else android.R.drawable.ic_menu_help)
+
 
         binding.btnIncrease.setOnClickListener {
             p.quantity++
             notifyDataSetChanged()
             onDataChanged()
         }
+
 
         binding.btnDecrease.setOnClickListener {
             if (p.quantity > 0) {
@@ -49,12 +48,13 @@ class ProductAdapter(
                 onDataChanged()
             }
         }
-        
         binding.btnDelete.setOnClickListener {
             products.removeAt(position)
             notifyDataSetChanged()
             onDataChanged()
         }
+
+
 
         return binding.root
     }

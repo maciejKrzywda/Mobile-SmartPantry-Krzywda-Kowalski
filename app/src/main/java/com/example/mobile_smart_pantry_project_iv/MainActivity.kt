@@ -2,6 +2,9 @@ package com.example.mobile_smart_pantry_project_iv
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -51,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         loadPantry()
+        setupSpinner()
 
 
     }
@@ -84,6 +88,20 @@ class MainActivity : AppCompatActivity() {
             e.printStackTrace()
         }
     }
+    private fun setupSpinner() {
+        val items = arrayOf("Tools", "Equimpent", "Exotic")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerID.adapter = adapter
+
+        binding.spinnerID.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                //tutaj sortowanie zeby sie wyswietlaly po danej kategorii
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {}
+        }
+    }
+
 
 
 }

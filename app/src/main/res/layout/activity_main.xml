@@ -22,6 +22,13 @@
         android:divider="@android:color/transparent"
         android:dividerHeight="8dp" />
 
+    <Spinner
+        android:id="@+id/spinnerID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        />
+
     <Button
         android:id="@+id/btnAddProduct"
         android:layout_width="match_parent"
